@@ -5,12 +5,14 @@ $("#btnConfirm").click(function(){
     const re = new RegExp("[^a-zA-Z]")
     const remail = new RegExp (/.+\@.+\..+/)
     const redate = new RegExp(/^\d{2}\/\d{2}\/\d{4}$/)
+    const recode = new RegExp (/^FR\d{5}[A-Z.-_]{3}x$/)
 
 function confirmer(){
     let nom = $("#nom")
     let prenom = $("#prenom")
     let email = $("#mail")
     let date = $("#date")
+    let code = $("#code")
 
     let saisieDate = $("#date").val().replaceAll("-","/")
     saisieDate = $("#date").val().replaceAll(".","/")
@@ -41,7 +43,12 @@ function confirmer(){
     else {
         $("#dateVide").addClass("invisible")
     }
-    if (re.test(nom.val()) === false && re.test(prenom.val()) === false && remail.test(email.val()) === true &&  redate.test(date.val()) === true) {
+    if(code.val()==="" || recode.test(code.val()) === false){
+        $("#codeVide").removeClass("invisible")
+    }else{
+        $("#codeVide").addClass("invisible")
+    }
+    if (re.test(nom.val()) === false && re.test(prenom.val()) === false && remail.test(email.val()) === true &&  redate.test(date.val()) === true && recode.test(code.val())=== true) {
         alert("c'est tout bon")
     }
 }
